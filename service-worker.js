@@ -1,4 +1,4 @@
-const CACHE_NAME = "weather-app-shell-v2";
+const CACHE_NAME = "weather-app-shell-v3";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -46,9 +46,13 @@ self.addEventListener("fetch", event => {
     }
 
     const cached = await cache.match(request);
-    if (cached) return cached;
-    const response = await fetch(request);
-    if (response.ok) await cache.put(request, response.clone());
-    return response;
+    try {
+      const response = await fetch(request);
+      if (response.ok) await cache.put(request, response.clone());
+      return response;
+    } catch (error) {
+      if (cached) return cached;
+      throw error;
+    }
   })());
 });
