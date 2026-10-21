@@ -30,6 +30,10 @@ button { -webkit-tap-highlight-color: transparent; }
 .install-button:focus-visible { outline: 3px solid #79a9ec88; outline-offset: 2px; }
 .install-button svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .install-button[hidden] { display: none; }
+.theme-button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 38px; padding: 0 12px; border: 1px solid #dce7f5; border-radius: 11px; color: #3479d8; background: #fff; box-shadow: 0 3px 10px #3151780b; cursor: pointer; font-size: 11px; font-weight: 700; transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
+.theme-button:hover { background: #f6f9fe; box-shadow: 0 6px 14px #31517814; transform: translateY(-1px); }
+.theme-button:focus-visible { outline: 3px solid #79a9ec88; outline-offset: 2px; }
+.theme-button svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .live-dot { width: 7px; height: 7px; background: #55c697; display: inline-block; border-radius: 50%; box-shadow: 0 0 0 4px #55c69722; }
 .intro { max-width: 630px; margin: 69px auto 50px; text-align: center; }
 .eyebrow { display: flex; align-items: center; justify-content: center; gap: 9px; color: #6987ae; font-size: 10px; font-weight: 700; letter-spacing: .17em; }
@@ -227,4 +231,72 @@ h2 { margin: 7px 0 0; color: #1c3656; font-size: 23px; font-weight: 700; letter-
   .topbar-note { display: none; }
   .install-button { width: 39px; min-height: 39px; padding: 0; }
   .install-button span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+  .theme-button { width: 39px; min-height: 39px; padding: 0; }
+  .theme-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
 }
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #e6edf7;
+  --muted: #a1b0c3;
+  --blue: #7fb2f4;
+  --blue-dark: #5e99e9;
+  --line: #2a3a50;
+  --paper: #17263b;
+  --bg: #101a2a;
+}
+:root[data-theme="dark"] body { color: var(--ink); background: radial-gradient(ellipse at 50% 0%, #1b2b41 0%, #101a2a 43rem, #0d1624 100%); }
+:root[data-theme="dark"] .topbar { border-color: #2a394e; }
+:root[data-theme="dark"] .topbar-note { color: #a4b3c6; }
+:root[data-theme="dark"] .eyebrow { color: #9bb2d1; }
+:root[data-theme="dark"] .eyebrow-line { background: #6f8fb7; }
+:root[data-theme="dark"] h1 { color: #edf3fb; }
+:root[data-theme="dark"] h1 span { color: #8ab9f4; }
+:root[data-theme="dark"] h2 { color: #e3ecf8; }
+:root[data-theme="dark"] .intro-copy { color: #a5b3c5; }
+:root[data-theme="dark"] .search-form { border-color: #2b3b51; background: rgba(23, 36, 55, .94); box-shadow: 0 11px 30px #00000024, 0 2px 7px #00000014; }
+:root[data-theme="dark"] .search-icon { stroke: #9aacc3; }
+:root[data-theme="dark"] .search-box input { color: #e7eef8; }
+:root[data-theme="dark"] .search-box input::placeholder { color: #91a1b6; }
+:root[data-theme="dark"] .input-hint { color: #8798ae; }
+:root[data-theme="dark"] .search-results { border-color: #30425a; background: #17263b; box-shadow: 0 16px 40px #00000040; }
+:root[data-theme="dark"] .city-option { color: #e5edf8; }
+:root[data-theme="dark"] .city-option:hover,
+:root[data-theme="dark"] .city-option:focus-visible { background: #22344c; }
+:root[data-theme="dark"] .city-option-pin { color: #9bc4fb; background: #243b58; }
+:root[data-theme="dark"] .city-option-sub,
+:root[data-theme="dark"] .city-option-arrow { color: #9aabc0; }
+:root[data-theme="dark"] .form-message { color: #ff929b; }
+:root[data-theme="dark"] .form-message.is-info { color: #a7c9f1; }
+:root[data-theme="dark"] .current-card { background: linear-gradient(130deg, #1e4678 0%, #1c3d68 56%, #28578d 100%); box-shadow: 0 14px 30px #00000030; }
+:root[data-theme="dark"] .detail-card,
+:root[data-theme="dark"] .forecast-card { border-color: #2a3a50; background: rgba(23, 36, 55, .92); box-shadow: 0 5px 18px #00000018; }
+:root[data-theme="dark"] .detail-card:hover,
+:root[data-theme="dark"] .forecast-card:hover { box-shadow: 0 12px 26px #00000035; }
+:root[data-theme="dark"] .detail-heading { color: #a2b2c7; }
+:root[data-theme="dark"] .detail-value { color: #e5edf8; }
+:root[data-theme="dark"] .detail-value small,
+:root[data-theme="dark"] .detail-note { color: #a0aec0; }
+:root[data-theme="dark"] .wind-icon { color: #9ac3f8; background: #213957; }
+:root[data-theme="dark"] .humidity-icon { color: #8ed1ca; background: #203e43; }
+:root[data-theme="dark"] .feels-icon { color: #edbd82; background: #453827; }
+:root[data-theme="dark"] .wind-meter,
+:root[data-theme="dark"] .feels-track { background: #2b3b51; }
+:root[data-theme="dark"] .humidity-bars i { background: #294347; }
+:root[data-theme="dark"] .humidity-bars i.active { background: #62b8ae; }
+:root[data-theme="dark"] .week-label { color: #a6b5c8; }
+:root[data-theme="dark"] .week-label-dot { background: #83b4f3; }
+:root[data-theme="dark"] .forecast-day { color: #d4dfed; }
+:root[data-theme="dark"] .forecast-date { color: #9aaabe; }
+:root[data-theme="dark"] .forecast-max { color: #d9e8fb; }
+:root[data-theme="dark"] .forecast-min { color: #a2b0c1; }
+:root[data-theme="dark"] .forecast-rain { color: #7ec8ec; }
+:root[data-theme="dark"] .forecast-skeleton { border-color: #293a50; background: linear-gradient(100deg, #17263b 25%, #20334c 38%, #17263b 60%); background-size: 200% 100%; }
+:root[data-theme="dark"] .footer { border-color: #2a394e; color: #a0aec0; }
+:root[data-theme="dark"] .footer a { color: #a6c7ef; }
+:root[data-theme="dark"] .footer a:hover { color: #d2e6ff; }
+:root[data-theme="dark"] .footer-mark { color: #9dc4f5; }
+:root[data-theme="dark"] .install-button,
+:root[data-theme="dark"] .theme-button { border-color: #354860; color: #c2dcff; background: #1b2b42; box-shadow: 0 3px 10px #00000018; }
+:root[data-theme="dark"] .install-button:hover,
+:root[data-theme="dark"] .theme-button:hover { background: #253a55; box-shadow: 0 6px 14px #00000025; }

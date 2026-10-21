@@ -4,6 +4,9 @@ const FORECAST_URL = "https://api.open-meteo.com/v1/forecast";
 const form = document.querySelector("#search-form");
 const input = document.querySelector("#city-input");
 const button = document.querySelector("#search-button");
+const themeButton = document.querySelector("#theme-button");
+const themeIcon = themeButton.querySelector(".theme-icon");
+const themeLabel = themeButton.querySelector(".theme-label");
 const installButton = document.querySelector("#install-button");
 const results = document.querySelector("#search-results");
 const message = document.querySelector("#form-message");
@@ -264,6 +267,28 @@ document.addEventListener("click", event => {
 window.addEventListener("online", () => {
   if (message.textContent.includes("интернет")) message.textContent = "Интернет снова доступен. Нажмите «Показать погоду».";
 });
+
+const sunIcon = '<circle cx="10" cy="10" r="3.5"/><path d="M10 1.5v2m0 13v2m8.5-8.5h-2m-13 0h-2m14.5-6-1.4 1.4m-9.2 9.2L4 16m12 0-1.4-1.4M4 4l1.4 1.4"/>';
+const moonIcon = '<path d="M17.8 12.4A7.5 7.5 0 0 1 7.6 2.2 7.8 7.8 0 1 0 17.8 12.4Z"/>';
+
+function updateTheme(theme, save = true) {
+  const isDark = theme === "dark";
+  document.documentElement.dataset.theme = isDark ? "dark" : "light";
+  themeButton.setAttribute("aria-pressed", String(isDark));
+  themeButton.setAttribute("aria-label", isDark ? "Переключить на светлую тему" : "Переключить на тёмную тему");
+  themeButton.title = isDark ? "Включить светлую тему" : "Включить тёмную тему";
+  themeLabel.textContent = isDark ? "Светлая" : "Тёмная";
+  themeIcon.innerHTML = isDark ? sunIcon : moonIcon;
+  document.querySelector('meta[name="theme-color"]').content = isDark ? "#101a2a" : "#f3f7fb";
+  if (save) {
+    try { localStorage.setItem("weather-theme", isDark ? "dark" : "light"); } catch {}
+  }
+}
+
+themeButton.addEventListener("click", () => {
+  updateTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+});
+updateTheme(document.documentElement.dataset.theme || "dark", false);
 
 let installPrompt = null;
 const appIsInstalled = () => window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
