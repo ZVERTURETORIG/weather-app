@@ -62,6 +62,7 @@ h1 span { color: #4281d3; }
 .city-option-sub { color: #94a2b4; font-size: 11px; }
 .city-option-arrow { color: #9caec2; }
 .form-message { min-height: 16px; margin: 8px 0 0; color: #da5962; font-size: 11px; }
+.form-message.is-info { color: #547ca9; }
 .form-message:empty { visibility: hidden; }
 .weather-layout { display: grid; grid-template-columns: 1.04fr 1fr; gap: 17px; transition: opacity .25s ease; }
 .weather-layout.is-loading { opacity: .67; }

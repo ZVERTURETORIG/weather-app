@@ -74,11 +74,18 @@ function setLoading(isLoading) {
   weatherPanel.setAttribute("aria-busy", String(isLoading));
   if (isLoading) {
     message.textContent = "";
+    message.classList.remove("is-info");
     results.classList.remove("is-visible");
   }
 }
 
 function showError(text) {
+  message.classList.remove("is-info");
+  message.textContent = text;
+}
+
+function showInfo(text) {
+  message.classList.add("is-info");
   message.textContent = text;
 }
 
@@ -129,6 +136,7 @@ async function onSearch(event) {
   const query = input.value.trim();
   results.classList.remove("is-visible");
   message.textContent = "";
+  message.classList.remove("is-info");
   if (query.length < 2) {
     showError("Введите название города (минимум 2 символа).");
     input.focus();
@@ -247,6 +255,7 @@ function temperatureDifference(air, feels) {
 form.addEventListener("submit", onSearch);
 input.addEventListener("input", () => {
   message.textContent = "";
+  message.classList.remove("is-info");
   results.classList.remove("is-visible");
 });
 document.addEventListener("click", event => {
@@ -266,7 +275,7 @@ window.addEventListener("beforeinstallprompt", event => {
 
 installButton.addEventListener("click", async () => {
   if (appIsInstalled()) {
-    showError("Приложение уже установлено на этом устройстве.");
+    showInfo("Приложение уже установлено на этом устройстве.");
     return;
   }
 
@@ -278,13 +287,13 @@ installButton.addEventListener("click", async () => {
     return;
   }
 
-  showError("Откройте меню браузера и выберите «Установить приложение» или «Добавить на главный экран».");
+  showInfo("Откройте меню браузера и выберите «Установить приложение» или «Добавить на главный экран».");
 });
 
 window.addEventListener("appinstalled", () => {
   installPrompt = null;
   installButton.hidden = true;
-  message.textContent = "Погода установлена. Теперь её можно открыть с рабочего стола.";
+  showInfo("Погода установлена. Теперь её можно открыть с рабочего стола.");
 });
 
 if (appIsInstalled()) installButton.hidden = true;
