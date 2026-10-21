@@ -1,9 +1,9 @@
-const CACHE_NAME = "weather-app-shell-v3";
+const CACHE_NAME = "weather-app-shell-v4";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./style.css",
-  "./app.js",
+  "./style.css?v=4",
+  "./app.js?v=4",
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
@@ -56,3 +56,4 @@ self.addEventListener("fetch", event => {
     }
   })());
 });
+
