@@ -24,6 +24,12 @@ button { -webkit-tap-highlight-color: transparent; }
 .brand-mark svg { width: 27px; }
 .brand-dot { color: var(--blue); }
 .topbar-note { display: flex; align-items: center; gap: 9px; color: #75869d; font-size: 12px; font-weight: 600; letter-spacing: .01em; }
+.topbar-actions { display: flex; align-items: center; gap: 17px; }
+.install-button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 38px; padding: 0 12px; border: 1px solid #dce7f5; border-radius: 11px; color: #3479d8; background: #fff; box-shadow: 0 3px 10px #3151780b; cursor: pointer; font-size: 11px; font-weight: 700; transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
+.install-button:hover { background: #f6f9fe; box-shadow: 0 6px 14px #31517814; transform: translateY(-1px); }
+.install-button:focus-visible { outline: 3px solid #79a9ec88; outline-offset: 2px; }
+.install-button svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.install-button[hidden] { display: none; }
 .live-dot { width: 7px; height: 7px; background: #55c697; display: inline-block; border-radius: 50%; box-shadow: 0 0 0 4px #55c69722; }
 .intro { max-width: 630px; margin: 69px auto 50px; text-align: center; }
 .eyebrow { display: flex; align-items: center; justify-content: center; gap: 9px; color: #6987ae; font-size: 10px; font-weight: 700; letter-spacing: .17em; }
@@ -214,4 +220,10 @@ h2 { margin: 7px 0 0; color: #1c3656; font-size: 23px; font-weight: 700; letter-
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+@media (max-width: 520px) {
+  .topbar-actions { gap: 0; }
+  .topbar-note { display: none; }
+  .install-button { width: 39px; min-height: 39px; padding: 0; }
+  .install-button span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
 }

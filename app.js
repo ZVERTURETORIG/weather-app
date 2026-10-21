@@ -4,6 +4,7 @@ const FORECAST_URL = "https://api.open-meteo.com/v1/forecast";
 const form = document.querySelector("#search-form");
 const input = document.querySelector("#city-input");
 const button = document.querySelector("#search-button");
+const installButton = document.querySelector("#install-button");
 const results = document.querySelector("#search-results");
 const message = document.querySelector("#form-message");
 const weatherPanel = document.querySelector("#weather-panel");
@@ -254,6 +255,45 @@ document.addEventListener("click", event => {
 window.addEventListener("online", () => {
   if (message.textContent.includes("интернет")) message.textContent = "Интернет снова доступен. Нажмите «Показать погоду».";
 });
+
+let installPrompt = null;
+const appIsInstalled = () => window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+
+window.addEventListener("beforeinstallprompt", event => {
+  event.preventDefault();
+  installPrompt = event;
+});
+
+installButton.addEventListener("click", async () => {
+  if (appIsInstalled()) {
+    showError("Приложение уже установлено на этом устройстве.");
+    return;
+  }
+
+  if (installPrompt) {
+    installPrompt.prompt();
+    const choice = await installPrompt.userChoice;
+    installPrompt = null;
+    if (choice.outcome === "accepted") installButton.hidden = true;
+    return;
+  }
+
+  showError("Откройте меню браузера и выберите «Установить приложение» или «Добавить на главный экран».");
+});
+
+window.addEventListener("appinstalled", () => {
+  installPrompt = null;
+  installButton.hidden = true;
+  message.textContent = "Погода установлена. Теперь её можно открыть с рабочего стола.";
+});
+
+if (appIsInstalled()) installButton.hidden = true;
+
+if ("serviceWorker" in navigator && window.isSecureContext) {
+  navigator.serviceWorker.register("./service-worker.js").catch(error => {
+    console.warn("Не удалось включить офлайн-режим:", error);
+  });
+}
 
 // Для учебного примера при первом открытии автоматически показываем Астану.
 loadWeather({ name: "Астана", country: "Казахстан", latitude: 51.1694, longitude: 71.4491 });
